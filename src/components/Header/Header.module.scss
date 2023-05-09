@@ -1,0 +1,36 @@
+.header_wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header_right {
+    display: flex;
+}
+
+.loopa {
+    margin-right: 84px;
+
+    img {
+        margin-top: 20px;
+    }
+}
+
+.nav {
+    list-style-type: none;
+    display: flex;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+
+.nav__items.active {
+    background-color: #5667FF;
+    color: #fff;
+    cursor: not-allowed;
+}
+
+.nav__items {
+    padding: 16px 22px 74px 22px;
+}
