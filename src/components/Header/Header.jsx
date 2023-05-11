@@ -7,7 +7,7 @@ import HeaderMagnifying from './HeaderMagnifying/HeaderMagnifying';
 import logo from './../../img/logo-1.svg';
 import magnifying from './../../img/group.png';
 
-function Header() {
+function Header({results}) {
 
   const [searchEngine, setSearchEngine] = React.useState(false)
 
@@ -54,7 +54,7 @@ function Header() {
 
       {
         searchEngine ? 
-          (<HeaderMagnifying clickOnMagnifyingClose = {clickOnMagnifyingClose}/>) 
+          (<HeaderMagnifying clickOnMagnifyingClose = {clickOnMagnifyingClose} results = {results} />) 
         : null
       }
     </div>

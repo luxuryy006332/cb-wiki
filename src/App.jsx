@@ -1,22 +1,22 @@
 import React from 'react'
 import './App.scss';
+import axios from 'axios'
 import Header from './components/Header/Header';
 import NewsBlock from './components/NewsBlock/NewsBlock';
 import pointerSvg from './img/pointer.svg';
 import infoImg from './img/infoImg.jpg';
 
 function App() {
-  // const [results, setResults] = React.useState([]);
+  const [results, setResults] = React.useState([]);
 
   React.useEffect(() => {
-    fetch('http://localhost:3000/public/db.json')
-      .then((res) => res.json())
-      .then((json) => console.log(json))
+    axios.get('http://localhost:3000/db.json')
+    .then((res) => setResults(res.data.data))
   }, [])
   return (
     <div>
       <div className="container">
-        <Header />
+        <Header results = {results} setResults ={setResults}/>
         <section>
           <div className="news">
             <div className="main__news">

@@ -4,21 +4,35 @@ import buttonClose from '../../../img/close.png';
 
 import s from '../Header.module.scss'
 
-const HeaderMagnifying = ({ clickOnMagnifyingClose }) => {
-    
+const HeaderMagnifying = ({ clickOnMagnifyingClose, results }) => {
+    const [informationArray, setInformationArray] = React.useState(results);
+    const [searchTerm, setSearchTerm] = React.useState('');
 
-    async function handleInputChange(event) {
-        // const query = event.target.value;
-        // const response = await fetch(`searchq=${query}`);
-        // const data = await response.json();
-        // setResults(data);
+    const filterInfo = (searchText, listOfInfo) => {
+        if (!searchText) {
+            return listOfInfo
+        }
+
+        return listOfInfo.filter((e) =>
+            ((e.description + e.title).toLowerCase()).includes(searchText.toLowerCase())
+        )
     }
+
+    React.useEffect(() => {
+        const Debounce = setTimeout(() => {
+            const filteredInfoText = filterInfo(searchTerm, results)
+            setInformationArray(filteredInfoText)
+        }, 300)
+
+        return () => clearTimeout(Debounce)
+    }, [searchTerm])
+
     return (
         <div className={s.wrapper_magnifying}>
             <div className={s.magnifying_content}>
                 <div>
                     <div className={s.head_manifying}>
-                        <input  onChange = {handleInputChange} type="text" placeholder='Я ищу' />
+                        <input onChange={(e) => setSearchTerm(e.target.value)} type="text" placeholder='Я ищу' />
                         <button>
                             <img src={magnifyingWhite} alt="" />
                         </button>
@@ -31,13 +45,20 @@ const HeaderMagnifying = ({ clickOnMagnifyingClose }) => {
             </div>
 
             <div className={s.searching_results_content}>
-                {/* <div className={s.searching_results}>
-                    <a href="#!">
-                        Документы
-                    </a>
+                {
+                    informationArray.map((item) => (
+                        <div className={s.searching_results} key={item.id}>
+                            <a href="#!">
+                                {item.title}
+                            </a>
 
-                    <p>Контекстная панель Кнопка Описание Создать документ Вызов меню выбора создаваемого типа документа. Настроить Переход к диалогу настройки внешнего вида отчётной формы. Excel Экспорт ...</p>
-                </div>         */}
+                            <p>
+                                {item.description}
+                            </p>
+                        </div>
+                    ))
+                }
+
             </div>
         </div>
     );
