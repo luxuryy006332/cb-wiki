@@ -4,18 +4,17 @@ import group from './../../img/group.png';
 import s from './Header.module.scss';
 import HeaderNav from './HeaderNav/HeaderNav';
 
-function Header() {
+function Header({ items }) {
+
+  const [activeItem, setActiveItem] = React.useState(null);
+
+  const onSelectItem = (index) => {
+    setActiveItem(index);
+  }
+
+
   return (
     <header>
-      {/* <img src={logo} alt="logo" />
-        <a href='search'><img src={group} alt="loopa" /></a> 
-        <ul className={s.nav}>
-            <li className={`${s.nav__items} ${s.active}`}>Лента</li>
-            <li className={s.nav__items}>Магазин</li>
-            <li className={s.nav__items}>Инструкции</li>
-            <li className={s.nav__items}>О нас</li>
-        </ul> */}
-
       <div className={s.header_wrapper}>
         <div>
           <a href='home'><img src={logo} alt="logo" /></a>
@@ -23,17 +22,25 @@ function Header() {
 
         <div className={s.header_right}>
           <div className={s.loopa}>
-            
+
             <img src={group} alt="" />
           </div>
 
           <div>
             <ul className={s.nav}>
-              <li className={`${s.nav__items} ${s.active}`}>Лента</li>
-              <HeaderNav text='Магазин' />
-              <HeaderNav text='Инструкции' />
-              <HeaderNav text='О нас' />
-              
+              <li
+                className={activeItem === null
+                  ? `${s.nav__items} ${s.active}` : `${s.nav__items}`}
+                onClick={() => onSelectItem(null)}>Лента
+              </li>
+              {items.map((name, index) => (
+                <li className={activeItem === index ? `${s.nav__items} ${s.active}` : `${s.nav__items}`}
+                  onClick={() => onSelectItem(index)}
+                  key={`${name}_${index}`}>
+                  {name}
+                </li>
+              ))}
+
             </ul>
           </div>
         </div>
