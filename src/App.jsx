@@ -1,3 +1,4 @@
+import React from 'react'
 import './App.scss';
 import Header from './components/Header/Header';
 import NewsBlock from './components/NewsBlock/NewsBlock';
@@ -5,6 +6,13 @@ import pointerSvg from './img/pointer.svg';
 import infoImg from './img/infoImg.jpg';
 
 function App() {
+  // const [results, setResults] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch('http://localhost:3000/public/db.json')
+      .then((res) => res.json())
+      .then((json) => console.log(json))
+  }, [])
   return (
     <div>
       <div className="container">
