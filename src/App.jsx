@@ -12,15 +12,15 @@ function App() {
       <BrowserRouter>
       <div className="container">
         <Header items={['Лента', 'Магазин', 'Инструкции', 'О нас']} />
-
+      </div>
         <Routes>
-          <Route path="/ribbon" element={<Ribbon />} />
+          <Route path="/" element={<Ribbon />} />
           <Route path="/store" element={<Store />} />
           <Route path="/instruction" element={<Instruction />} />
           <Route path="/aboutWe" element={<AboutWe />} />
         </Routes>
         
-      </div>
+      
 
       </BrowserRouter>
     </div>
