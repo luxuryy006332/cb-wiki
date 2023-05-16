@@ -6,13 +6,6 @@ import HeaderNav from './HeaderNav/HeaderNav';
 
 function Header({ items }) {
 
-  const [activeItem, setActiveItem] = React.useState(null);
-
-  const onSelectItem = (index) => {
-    setActiveItem(index);
-  }
-
-
   return (
     <header>
       <div className={s.header_wrapper}>
@@ -28,18 +21,10 @@ function Header({ items }) {
 
           <div>
             <ul className={s.nav}>
-              <li
-                className={activeItem === null
-                  ? `${s.nav__items} ${s.active}` : `${s.nav__items}`}
-                onClick={() => onSelectItem(null)}>Лента
-              </li>
-              {items.map((name, index) => (
-                <li className={activeItem === index ? `${s.nav__items} ${s.active}` : `${s.nav__items}`}
-                  onClick={() => onSelectItem(index)}
-                  key={`${name}_${index}`}>
-                  {name}
-                </li>
-              ))}
+              <HeaderNav text={items[0]} path="/ribbon" />
+              <HeaderNav text={items[1]} path="/store" />
+              <HeaderNav text={items[2]} path="/instruction" />
+              <HeaderNav text={items[3]} path="/aboutWe" />
 
             </ul>
           </div>
